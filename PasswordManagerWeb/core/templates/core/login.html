@@ -1,0 +1,32 @@
+{% extends 'core/base_accounts.html' %}
+<!-- Contenido de la página -->
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            Login
+          </div>
+          <div class="card-body">
+            <!-- Formulario de inicio de sesión -->
+            <form action="/login" method="post">
+              <!-- Campo de correo electrónico -->
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <!-- Campo de contraseña -->
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <!-- Botón de inicio de sesión -->
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

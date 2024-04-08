@@ -1,4 +1,52 @@
 {% extends 'core/base.html' %}
 {% block content %}
-<h1>Window for new password</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            New Password
+          </div>
+          <div class="card-body">
+            <!-- Formulario para agregar una nueva contraseña -->
+            <form action="/save-password" method="post">
+              <!-- Nombre del sitio web -->
+              <div class="form-group">
+                <label for="website_name">Website Name</label>
+                <input type="text" class="form-control" id="website_name" name="website_name" required>
+              </div>
+              <!-- Enlace del sitio web -->
+              <div class="form-group">
+                <label for="website_link">Website Link</label>
+                <input type="text" class="form-control" id="website_link" name="website_link">
+              </div>
+              <!-- Nombre de usuario -->
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+              </div>
+              <!-- Contraseña -->
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <!-- Descripción -->
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+              </div>
+              <!-- Contraseña maestra -->
+              <div class="form-group">
+                <label for="master_password">Master Password</label>
+                <input type="password" class="form-control" id="master_password" name="master_password" required>
+              </div>
+              <!-- Botón de enviar -->
+              <button type="submit" class="btn btn-primary">Save Password</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}

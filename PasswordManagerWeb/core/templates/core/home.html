@@ -1,22 +1,22 @@
 {% extends 'core/base.html' %}
-<!-- Contenido de la página -->
+<!-- Content -->
 {% block content %}
-  <div class="container mt-5">
-    <a href="{% url 'add' %}" class="btn btn-primary">Store your first password</a>
-  </div>
-<div class="container mt-5">
-    <table class="table">
-      <thead class="">
-        <tr>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><button type="button" class="btn btn-primary btn-sm rounded-pill">Facebook</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  {% if sites %}
+    <div class="container mt-5">
+      <table class="table">
+        <tbody>
+          {% for site in sites %}
+            <tr>
+              <td><button type="button" class="btn btn-primary btn-sm rounded-pill">{{ site.website_name }}</button></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="container mt-5">
+      <a href="{% url 'add' %}" class="btn btn-primary">Store your first password</a>
+    </div>
+  {% endif %}
 {% endblock %}
-<!-- Fin contenido -->
+<!-- End Content -->

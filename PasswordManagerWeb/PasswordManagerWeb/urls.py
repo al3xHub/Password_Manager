@@ -16,14 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core import views
+from core.views import CreateSite
 
 urlpatterns = [
     path('',views.home, name="home"),
     path('profile/',views.profile, name="profile"),
-    path('add/',views.add, name="add"),
+    path('add/',CreateSite.as_view(), name="add"),
     path('login/',views.login, name="login"),
     path('logout/',views.logout, name="logout"),
     path('register/',views.register, name="register"),
-    path('site/',views.site, name="site"),
+    path('site/<str:pk>/',views.site, name="site"),
     path('admin/', admin.site.urls),
 ]

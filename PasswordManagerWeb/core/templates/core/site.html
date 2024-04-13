@@ -1,4 +1,54 @@
 {% extends 'core/base.html' %}
 {% block content %}
-<h1>Site description</h1>
+<div class="container mt-5">
+        <form method="POST">
+            {% csrf_token %}
+            <!-- Name -->
+            <div class="form-group row">
+                <label for="name" class="col-sm-3 col-form-label">Name:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="name" value="{{sites.website_name}}" readonly>
+                </div>
+            </div>
+
+            <!-- Link -->
+            <div class="form-group row">
+                <label for="link" class="col-sm-3 col-form-label">Link:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="link" value="{{sites.website_link}}" readonly>
+                </div>
+            </div>
+
+            <!-- Username -->
+            <div class="form-group row">
+                <label for="username" class="col-sm-3 col-form-label">Username:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="username" value="{{sites.website_username}}" readonly>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group row">
+                <label for="description" class="col-sm-3 col-form-label">Description:</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" id="description" rows="3" readonly>{{sites.website_notes}}</textarea>
+                </div>
+            </div>
+
+            <!-- Provide Master Password -->
+            <div class="form-group row">
+                <label for="masterPassword" class="col-sm-12 col-form-label">Provide Master Password to view password:</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" id="masterPassword" placeholder="Enter your master password">
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group row">
+                <div class="col-sm-9 offset-sm-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock %}

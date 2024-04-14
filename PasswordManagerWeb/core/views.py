@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Site
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -43,10 +44,16 @@ def site(request, pk):
     return render(request, "core/site.html", context)
 
 
-#Create sites logic
+# Create sites logic
 class CreateSite(CreateView):
     model = Site
     fields = [
         'website_name', 'website_link', 'website_username', 'website_password',
         'website_notes'
     ]
+
+
+# Delete Site
+class DeleteSite(DeleteView):
+    model = Site
+    success_url = reverse_lazy('home')

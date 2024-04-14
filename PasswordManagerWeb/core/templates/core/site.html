@@ -50,5 +50,14 @@
                 </div>
             </div>
         </form>
+            <!-- Delete Button -->
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Delete Site:</label>
+                <div class="col-sm-9 offset-sm-3">
+                    <a href="{% url 'delete' sites.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+
+        </form>
     </div>
 {% endblock %}

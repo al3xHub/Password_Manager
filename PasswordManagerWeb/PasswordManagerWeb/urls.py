@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core import views
-from core.views import CreateSite
+from core.views import CreateSite, DeleteSite
 
 urlpatterns = [
     path('',views.home, name="home"),
@@ -26,5 +26,6 @@ urlpatterns = [
     path('logout/',views.logout, name="logout"),
     path('register/',views.register, name="register"),
     path('site/<str:pk>/',views.site, name="site"),
+    path('delete/<int:pk>/', views.DeleteSite.as_view(), name="delete"),
     path('admin/', admin.site.urls),
 ]

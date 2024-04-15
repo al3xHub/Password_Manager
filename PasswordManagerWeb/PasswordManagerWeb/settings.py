@@ -125,3 +125,7 @@ if DEBUG:
     EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 else:
     pass
+
+# Media Files for Profile
+MEDIA_URL = '/media/'
+MEDIRA_ROOT = os.path.join(BASE_DIR, 'media')

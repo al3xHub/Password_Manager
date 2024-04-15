@@ -29,10 +29,6 @@ def logout(request):
     return render(request, "core/logout.html")
 
 
-def register(request):
-    return render(request, "core/register.html")
-
-
 def site(request, pk):
     try:
         sites = Site.objects.get(id=pk)

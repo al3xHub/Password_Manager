@@ -1,10 +1,14 @@
 {% extends 'core/base_accounts.html' %}
+{% block title %}Login {% endblock %}
 <!-- Contenido de la página -->
 {% block content %}
 <style>.errorlist{color:red;}</style>
 <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
+        {% if 'register' in request.GET %}
+                <div class="alert alert-success" role="alert">User registered successfully!</div>
+        {% endif %}
         <div class="card">
           <div class="card-header">
             Login
@@ -31,7 +35,9 @@
             </form>
           </div>
         </div>
-        <p class="mt-3">If you don't have any account yet, register <a href="{% url 'register' %}">here</a>!</p>
+        <p class="mt-3">If you don't have any account yet, register <a href="{% url 'signup' %}">here</a>!</p>
+        <p class="mt-3">Did you forget your password? Click <a href="{% url 'password_reset' %}">here</a>!</p>
+
       </div>
 
     </div>

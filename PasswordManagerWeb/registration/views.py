@@ -1,12 +1,15 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from .forms import UserCreationFormWithEmail
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
-from django.views.generic.base import TemplateView
+from django.contrib.auth.models import User
+from django.views.generic.edit import UpdateView, DeleteView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django import forms
+from .models import Profile
 
 
 # Create your views here.
@@ -34,5 +37,21 @@ class SignUpView(CreateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ProfileUpdate(TemplateView):
+class ProfileUpdate(UpdateView):
+    model = Profile
+    fields = [
+        'avatar', 'link'
+    ]
+    success_url = reverse_lazy('profile')
     template_name = 'registration/profile_form.html'
+
+    # Get user ID
+    def get_object(self, queryset=None):
+        profile, created = Profile.objects.get_or_create(user=self.request.user)
+        return profile
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = User.objects.get(pk=self.request.user.id)
+        context['user_data'] = user
+        return context

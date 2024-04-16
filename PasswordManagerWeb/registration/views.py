@@ -1,5 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
+from django.views import generic
+
 from .forms import UserCreationFormWithEmail, EmailForm
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
@@ -67,10 +70,17 @@ class EmailUpdate(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
-    #modify template email
+    # modify template email
     def get_form(self, form_class=None):
         form = super(EmailUpdate, self).get_form()
         form.fields['email'].widget = forms.EmailInput(
-            attrs={'class':'form-control mb-2', 'placeholder':'Email'}
+            attrs={'class': 'form-control mb-2', 'placeholder': 'Email'}
         )
         return form
+
+
+class DeleteUser(SuccessMessageMixin, generic.DeleteView):
+    model = User
+    template_name = 'registration/delete_user_confirm.html'
+    success_message = 'Account already deleted'
+    success_url = reverse_lazy('login')

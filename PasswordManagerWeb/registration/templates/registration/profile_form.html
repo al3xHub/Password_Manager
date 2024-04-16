@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% block title %}Profile {% endblock %}
 <!-- Contenido de la página -->
 {% block content %}
@@ -13,6 +14,11 @@
             <!-- User data -->
             <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
+              {% if request.user.profile.avatar %}
+                <img src="{{request.user.profile.avatar.url}}" class="img-fluid mb-3" style="max-width: 200px; max-height: 200px;">
+              {% else %}
+                <img src="{% static 'registration/img/noavatar.jpg' %}" class="img-fluid mb-3" style="max-width: 200px; max-height: 200px;">
+              {% endif %}
               {{ form.as_p }}
               <div class="mb-3">
                 <a href="{{request.user.profile.link}}" target="_blank">{{request.user.profile.link}}</a>

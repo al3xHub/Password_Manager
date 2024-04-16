@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from .forms import UserCreationFormWithEmail
+from .forms import UserCreationFormWithEmail, EmailForm
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
@@ -55,3 +55,22 @@ class ProfileUpdate(UpdateView):
         user = User.objects.get(pk=self.request.user.id)
         context['user_data'] = user
         return context
+
+
+@method_decorator(login_required, name='dispatch')
+class EmailUpdate(UpdateView):
+    form_class = EmailForm
+    success_url = reverse_lazy('profile')
+    template_name = 'registration/profile_email_form.html'
+
+    # Get user
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    #modify template email
+    def get_form(self, form_class=None):
+        form = super(EmailUpdate, self).get_form()
+        form.fields['email'].widget = forms.EmailInput(
+            attrs={'class':'form-control mb-2', 'placeholder':'Email'}
+        )
+        return form

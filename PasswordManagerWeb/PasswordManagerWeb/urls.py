@@ -22,8 +22,6 @@ from django.conf import settings
 urlpatterns = [
     path('', views.home, name="home"),
     path('add/', CreateSite.as_view(), name="add"),
-    path('login/', views.login, name="login"),
-    path('logout/', views.logout, name="logout"),
     path('site/<str:pk>/', views.site, name="site"),
     path('delete/<int:pk>/', views.DeleteSite.as_view(), name="delete"),
     path('admin/', admin.site.urls),

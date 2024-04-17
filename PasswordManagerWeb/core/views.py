@@ -1,12 +1,16 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Site
 from django.views.generic import CreateView, DeleteView
 from django.urls import reverse_lazy
 
 
 # Create your views here.
+@login_required
 def home(request):
-    sites = Site.objects.all()
+    user = request.user
+    sites = Site.objects.filter(user=user)
     context = {
         'sites': sites
     }
@@ -41,12 +45,17 @@ def site(request, pk):
 
 
 # Create sites logic
-class CreateSite(CreateView):
+class CreateSite(LoginRequiredMixin, CreateView):
     model = Site
     fields = [
         'website_name', 'website_link', 'website_username', 'website_password',
         'website_notes'
     ]
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 # Delete Site

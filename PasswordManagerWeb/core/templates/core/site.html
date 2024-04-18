@@ -7,7 +7,7 @@
             <!-- Name -->
             <div class="form-group row">
                 <label for="name" class="col-sm-3 col-form-label">Name:</label>
-                <div class="col-sm-9">
+                <div class="col-sm-7">
                     <input type="text" class="form-control" id="name" value="{{sites.website_name}}" readonly>
                 </div>
             </div>
@@ -15,7 +15,7 @@
             <!-- Link -->
             <div class="form-group row">
                 <label for="link" class="col-sm-3 col-form-label">Link:</label>
-                <div class="col-sm-9">
+                <div class="col-sm-7">
                     <input type="text" class="form-control" id="link" value="{{sites.website_link}}" readonly>
                 </div>
             </div>
@@ -23,7 +23,7 @@
             <!-- Username -->
             <div class="form-group row">
                 <label for="username" class="col-sm-3 col-form-label">Username:</label>
-                <div class="col-sm-9">
+                <div class="col-sm-7">
                     <input type="text" class="form-control" id="username" value="{{sites.website_username}}" readonly>
                 </div>
             </div>
@@ -31,7 +31,7 @@
             <!-- Description -->
             <div class="form-group row">
                 <label for="description" class="col-sm-3 col-form-label">Description:</label>
-                <div class="col-sm-9">
+                <div class="col-sm-7">
                     <textarea class="form-control" id="description" rows="3" readonly>{{sites.website_notes}}</textarea>
                 </div>
             </div>
@@ -39,37 +39,48 @@
             <!-- Password -->
             <div class="form-group row">
                 <label for="password" class="col-sm-3 col-form-label">Password:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                     <input type="password" class="form-control" id="password" value="{{sites.website_password}}" readonly>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <button type="button" class="btn btn-primary" id="togglePassword">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/><path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/><path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
                         </svg>
                     </button>
                 </div>
             </div>
-
-            <!-- Delete Button -->
-            <div class="form-group row">
-                <div class="col-sm-9 offset-sm-3 mt-5">
-                    <a href="{% url 'delete' sites.id %}" class="btn btn-danger">Delete {{sites.website_name}} site</a>
-                </div>
-            </div>
+            <a href="{% url 'update' sites.id %}" class="btn btn-primary">Update {{sites.website_name}}</a>
+            <a href="{% url 'delete' sites.id %}" class="btn btn-danger">Delete {{sites.website_name}}</a>
         </form>
     </div>
 
     <script>
+        // Function to toggle password visibility
         document.getElementById("togglePassword").addEventListener("click", function() {
             var passwordField = document.getElementById("password");
             if (passwordField.type === "password") {
                 passwordField.type = "text";
-
             } else {
                 passwordField.type = "password";
-
             }
+        });
+
+        // Function to enable editing for each field
+        document.getElementById("editNameBtn").addEventListener("click", function() {
+            document.getElementById("name").readOnly = false;
+        });
+        document.getElementById("editLinkBtn").addEventListener("click", function() {
+            document.getElementById("link").readOnly = false;
+        });
+        document.getElementById("editUsernameBtn").addEventListener("click", function() {
+            document.getElementById("username").readOnly = false;
+        });
+        document.getElementById("editDescriptionBtn").addEventListener("click", function() {
+            document.getElementById("description").readOnly = false;
+        });
+        document.getElementById("editPasswordBtn").addEventListener("click", function() {
+            document.getElementById("password").readOnly = false;
         });
     </script>
 {% endblock %}

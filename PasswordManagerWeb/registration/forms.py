@@ -26,7 +26,7 @@ class EmailForm(forms.ModelForm):
         model = User
         fields = ['email']
 
-# verify changed email, then check if there is another one similar to cancel
+    # verify changed email, then check if there is another one similar to cancel
     def clean_email(self):
         email = self.cleaned_data.get("email")
         if 'email' in self.changed_data:

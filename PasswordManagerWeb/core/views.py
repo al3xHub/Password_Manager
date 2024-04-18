@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django import forms
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Site
-from django.views.generic import CreateView, DeleteView
-from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, UpdateView
+from django.urls import reverse_lazy, reverse
 
 
 # Create your views here.
@@ -42,6 +43,34 @@ def site(request, pk):
     except:
         return redirect("home")
     return render(request, "core/site.html", context)
+
+
+class SiteUpdate(UpdateView):
+    model = Site
+    fields = [
+        'website_name', 'website_link', 'website_username', 'website_password',
+        'website_notes'
+    ]
+    template_name_suffix = '_update_form'
+
+    def get_success_url(self):
+        return reverse('site', kwargs={'pk': self.object.pk})
+
+    def get_form(self, form_class=None):
+        form = super(SiteUpdate, self).get_form()
+
+        # Modify form
+        form.fields['website_name'].widget = forms.TextInput(
+            attrs={'class': 'form-control mb-2'})
+        form.fields['website_link'].widget = forms.TextInput(
+            attrs={'class': 'form-control mb-2'})
+        form.fields['website_username'].widget = forms.TextInput(
+            attrs={'class': 'form-control mb-2'})
+        form.fields['website_password'].widget = forms.TextInput(
+            attrs={'class': 'form-control mb-2'})
+        form.fields['website_notes'].widget = forms.Textarea(
+            attrs={'class': 'form-control mb-2'})
+        return form
 
 
 # Create sites logic

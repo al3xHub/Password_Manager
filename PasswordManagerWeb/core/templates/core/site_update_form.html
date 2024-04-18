@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+{% block title %}Update Site {% endblock %}
+{% block content %}
+<div class="container mt-5">
+        <form method="POST">
+            {% csrf_token %}
+            <!-- Name -->
+            {{ form.as_table }}
+            <input type="submit" class="btn btn-success" value="Submit">
+        </form>
+    </div>
+{% endblock %}

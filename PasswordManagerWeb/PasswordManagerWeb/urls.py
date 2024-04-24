@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from core import views
-from core.views import CreateSite, DeleteSite, SiteUpdate
+from core.views import CreateSite, DeleteSite, SiteUpdate, HomeListView
 from django.conf import settings
 
 urlpatterns = [
-    path('', views.home, name="home"),
+    path('', HomeListView.as_view(), name='home'),
     path('add/', CreateSite.as_view(), name="add"),
     path('site/<str:pk>/', views.site, name="site"),
     path('update/<int:pk>/', SiteUpdate.as_view(), name="update"),

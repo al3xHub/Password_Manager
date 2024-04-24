@@ -3,19 +3,20 @@ from django import forms
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Site
-from django.views.generic import CreateView, DeleteView, UpdateView
+from django.views.generic import CreateView, DeleteView, UpdateView, ListView
 from django.urls import reverse_lazy, reverse
 
 
 # Create your views here.
-@login_required
-def home(request):
-    user = request.user
-    sites = Site.objects.filter(user=user)
-    context = {
-        'sites': sites
-    }
-    return render(request, "core/home.html", context)
+class HomeListView(ListView):
+    model = Site
+    paginate_by = 7
+    template_name = 'core/home.html'
+    context_object_name = 'sites'
+
+    def get_queryset(self):
+        user = self.request.user
+        return Site.objects.filter(user=user)
 
 
 def profile(request):

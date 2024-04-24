@@ -16,31 +16,9 @@
           <div class="card-body">
             <form method="post">
               {% csrf_token %}
-              <!-- Name -->
-              <div class="form-group">
-                <label for="website_name">Website Name</label>
-                <input type="text" class="form-control" id="website_name" name="website_name" maxlength="50" required>
-              </div>
-              <!-- Link -->
-              <div class="form-group">
-                <label for="website_link">Website Link</label>
-                <input type="text" class="form-control" id="website_link" name="website_link" maxlength="200">
-              </div>
-              <!-- username -->
-              <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="website_username" maxlength="50" required>
-              </div>
-              <!-- Password -->
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="website_password" maxlength="50" required>
-              </div>
-              <!-- Description -->
-              <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="website_notes" rows="3" maxlength="200"></textarea>
-              </div>
+              <table>
+                {{ form.as_table }}
+              </table>
               <!-- Send -->
               <button type="submit" class="btn btn-primary">Save Password</button>
             </form>

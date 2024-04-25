@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django import forms
+from django.db.models import Q
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-
 from .models import Site
 from django.views.generic import CreateView, DeleteView, UpdateView, ListView
 from django.urls import reverse_lazy, reverse
@@ -19,7 +20,25 @@ class HomeListView(ListView):
 
     def get_queryset(self):
         user = self.request.user
-        return Site.objects.filter(user=user)
+        queryset = Site.objects.filter(user=user)
+        return queryset
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        search_term = request.POST.get('search')
+        queryset = Site.objects.filter(user=user)
+
+        if search_term:
+            queryset = queryset.filter(
+                Q(website_name__icontains=search_term) |
+                Q(website_username__icontains=search_term) |
+                Q(website_link__icontains=search_term)
+            )
+            if not queryset.exists():
+                return redirect("home")
+
+        context = {'sites': queryset}
+        return render(request, self.template_name, context)
 
 
 def profile(request):

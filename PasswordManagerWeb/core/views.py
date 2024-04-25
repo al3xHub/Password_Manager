@@ -2,12 +2,15 @@ from django.contrib.auth.decorators import login_required
 from django import forms
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
+
 from .models import Site
 from django.views.generic import CreateView, DeleteView, UpdateView, ListView
 from django.urls import reverse_lazy, reverse
 
 
 # Create your views here.
+@method_decorator(login_required, name='dispatch')
 class HomeListView(ListView):
     model = Site
     paginate_by = 7

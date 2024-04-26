@@ -68,11 +68,17 @@ def site(request, pk):
 
 class SiteUpdateForm(forms.ModelForm):
     password_repeat = forms.CharField(label='Repeat Password', widget=forms.PasswordInput(
-        attrs={'class': 'form-control mb-2', 'placeholder': 'Repeat Password'}))
+        attrs={'class': 'form-control mb-2'}))
 
     class Meta:
         model = Site
         fields = ['website_name', 'website_link', 'website_username', 'website_notes', 'website_password']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if 'website_password' in self.fields:
+            website_password_value = self.instance.website_password
+            self.fields['password_repeat'].widget.attrs['value'] = website_password_value
 
     def clean(self):
         cleaned_data = super().clean()
@@ -105,6 +111,20 @@ class SiteUpdate(UpdateView):
         form.fields['website_notes'].widget = forms.Textarea(
             attrs={'class': 'form-control mb-2'})
         return form
+
+    def form_valid(self, form):
+        try:
+            response = super().form_valid(form)
+            messages.success(self.request, 'Site updated successfully.')
+            return response
+        except Exception as e:
+            messages.error(self.request, f'Error updating site: {str(e)}')
+            return self.response_class(
+                request=self.request,
+                template_name=self.template_name,
+                context=self.get_context_data(form=form),
+                status=400
+            )
 
 
 # Create sites logic
@@ -167,4 +187,3 @@ class DeleteSite(DeleteView):
                 context=self.get_context_data(),
                 status=400
             )
-

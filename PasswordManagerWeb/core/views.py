@@ -1,10 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.db.models import Q
-
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
+from django.utils.safestring import mark_safe
+
 from .models import Site
 from django.views.generic import CreateView, DeleteView, UpdateView, ListView
 from django.urls import reverse_lazy, reverse
@@ -64,12 +66,25 @@ def site(request, pk):
     return render(request, "core/site.html", context)
 
 
+class SiteUpdateForm(forms.ModelForm):
+    password_repeat = forms.CharField(label='Repeat Password', widget=forms.PasswordInput(
+        attrs={'class': 'form-control mb-2', 'placeholder': 'Repeat Password'}))
+
+    class Meta:
+        model = Site
+        fields = ['website_name', 'website_link', 'website_username', 'website_notes', 'website_password']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("website_password")
+        password_repeat = cleaned_data.get("password_repeat")
+        if password != password_repeat:
+            self.add_error('password_repeat', "Passwords do not match")
+
+
 class SiteUpdate(UpdateView):
     model = Site
-    fields = [
-        'website_name', 'website_link', 'website_username', 'website_password',
-        'website_notes'
-    ]
+    form_class = SiteUpdateForm
     template_name_suffix = '_update_form'
 
     def get_success_url(self):
@@ -86,7 +101,7 @@ class SiteUpdate(UpdateView):
         form.fields['website_username'].widget = forms.TextInput(
             attrs={'class': 'form-control mb-2'})
         form.fields['website_password'].widget = forms.TextInput(
-            attrs={'class': 'form-control mb-2'})
+            attrs={'type': 'password', 'class': 'form-control mb-2'})
         form.fields['website_notes'].widget = forms.Textarea(
             attrs={'class': 'form-control mb-2'})
         return form
@@ -126,10 +141,30 @@ class CreateSite(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        try:
+            messages.success(self.request, 'Site created successfully!')
+            return super().form_valid(form)
+        except Exception as e:
+            messages.error(self.request, f'Error: {str(e)}')
+            return self.form_invalid(form)
 
 
 # Delete Site
 class DeleteSite(DeleteView):
     model = Site
     success_url = reverse_lazy('home')
+
+    def delete(self, request, *args, **kwargs):
+        try:
+            response = super().delete(request, *args, **kwargs)
+            messages.success(self.request, 'Site deleted successfully.')
+            return response
+        except Exception as e:
+            messages.error(self.request, f'Error deleting site: {str(e)}')
+            return self.response_class(
+                request=self.request,
+                template_name=self.template_name,
+                context=self.get_context_data(),
+                status=400
+            )
+

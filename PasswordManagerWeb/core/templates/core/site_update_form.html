@@ -6,8 +6,10 @@
             {% csrf_token %}
             <!-- Name -->
             {{ form.as_table }}
+            <div class="my-5">
             <input type="submit" class="btn btn-success" value="Submit">
             <a href="{% url 'site' site.id %}" class="btn btn-secondary">Cancel</a>
+            </div>
         </form>
 </div>
 {% endblock %}

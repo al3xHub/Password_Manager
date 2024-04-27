@@ -121,11 +121,27 @@ LOGOUT_REDIRECT_URL = 'login'
 
 # Emails
 if DEBUG:
-    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-    EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+    # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+    # EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'alejandrobueno92@gmail.com'
+    EMAIL_HOST_PASSWORD = 'owke gxyv duqf wkqx'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = False
 else:
-    pass
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'alejandrobueno92@gmail.com'
+    EMAIL_HOST_PASSWORD = 'owke gxyv duqf wkqx'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = False
 
 # Media Files for Profile
 MEDIA_URL = '/media/'
 MEDIRA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# duration session
+SESSION_COOKIE_AGE = 3600
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

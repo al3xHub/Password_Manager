@@ -30,14 +30,16 @@ class HomeListView(ListView):
         search_term = request.POST.get('search')
         queryset = Site.objects.filter(user=user)
 
-        if search_term:
-            queryset = queryset.filter(
+        if search_term and len(search_term.strip()) > 0:
+            queryset = Site.objects.filter(user=user).filter(
                 Q(website_name__icontains=search_term) |
                 Q(website_username__icontains=search_term) |
                 Q(website_link__icontains=search_term)
             )
             if not queryset.exists():
                 return redirect("home")
+        else:
+            return redirect("home")
 
         context = {'sites': queryset}
         return render(request, self.template_name, context)

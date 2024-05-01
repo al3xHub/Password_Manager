@@ -11,7 +11,7 @@
         <form method="POST">
             {% csrf_token %}
             <!-- Name -->
-            <div class="form-group row">
+            <div class="form-group row my-3">
                 <label for="name" class="col-sm-3 col-form-label">Name:</label>
                 <div class="col-sm-7">
                     <input type="text" class="form-control" id="name" value="{{sites.website_name}}" readonly>
@@ -19,15 +19,16 @@
             </div>
 
             <!-- Link -->
-            <div class="form-group row">
+            <div class="form-group row my-3">
                 <label for="link" class="col-sm-3 col-form-label">Link:</label>
-                <div class="col-sm-7">
+                <div class="col-sm-6">
                     <input type="text" class="form-control" id="link" value="{{sites.website_link}}" readonly>
                 </div>
+                <div class="col-sm-2"><a href="{{sites.website_link}}" class="btn btn-secondary" target="_blank">Link</a></div>
             </div>
 
             <!-- Username -->
-            <div class="form-group row">
+            <div class="form-group row my-3">
                 <label for="username" class="col-sm-3 col-form-label">Username:</label>
                 <div class="col-sm-7">
                     <input type="text" class="form-control" id="username" value="{{sites.website_username}}" readonly>
@@ -35,7 +36,7 @@
             </div>
 
             <!-- Description -->
-            <div class="form-group row">
+            <div class="form-group row my-3">
                 <label for="description" class="col-sm-3 col-form-label">Description:</label>
                 <div class="col-sm-7">
                     <textarea class="form-control" id="description" rows="3" readonly>{{sites.website_notes}}</textarea>
@@ -43,7 +44,7 @@
             </div>
 
             <!-- Password -->
-            <div class="form-group row">
+            <div class="form-group row my-3">
                 <label for="password" class="col-sm-3 col-form-label">Password:</label>
                 <div class="col-sm-5">
                     <input type="password" class="form-control" id="password" value="{{sites.website_password}}" readonly>

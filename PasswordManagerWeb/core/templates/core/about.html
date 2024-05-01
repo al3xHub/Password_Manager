@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Abous us {% endblock %}
+{% block content %}
+<!-- Content -->
+<div class="container mt-5">
+    <div class="row justify-content-center mb-3">
+        <div class="col-3">
+            <img src="{% static 'core/images/Password_Manager.png' %}" class="img-fluid" alt="About Us Image" style="max-width: 150px;">
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 mb-5 ">
+            <h2>We maintain the <span class="text-primary">privacy</span> , <span class="text-primary">security</span>  and <span class="text-primary">protection</span> of your personal information.</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 my-5">
+            <h2 class="mb-4">About Password Manager</h2>
+            <p>Password Manager makes it easy for you to save passwords for each of your online accounts. Here you can store all your passwords, usernames and emails so you will never forget them.</p>
+            <p></p>
+        </div>
+        <div class="col-md-6 my-5">
+            <img src="{% static 'core/images/about_mujer_login.png' %}" class="img-fluid" alt="About Us Image">
+        </div>
+    </div>
+</div>
+{% endblock %}

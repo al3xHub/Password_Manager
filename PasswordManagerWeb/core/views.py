@@ -189,3 +189,7 @@ class DeleteSite(DeleteView):
                 context=self.get_context_data(),
                 status=400
             )
+
+
+def about(request):
+    return render(request, "core/about.html")

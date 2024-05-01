@@ -25,6 +25,7 @@ urlpatterns = [
     path('site/<str:pk>/', views.site, name="site"),
     path('update/<int:pk>/', SiteUpdate.as_view(), name="update"),
     path('delete/<int:pk>/', views.DeleteSite.as_view(), name="delete"),
+    path('about/', views.about, name="about"),
     path('admin/', admin.site.urls),
 
     # Authentication paths

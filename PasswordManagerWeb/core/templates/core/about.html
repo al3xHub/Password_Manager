@@ -6,22 +6,150 @@
 <div class="container mt-5">
     <div class="row justify-content-center mb-3">
         <div class="col-3">
-            <img src="{% static 'core/images/Password_Manager.png' %}" class="img-fluid" alt="About Us Image" style="max-width: 150px;">
+            <img src="{% static 'core/images/Password_Manager.png' %}" class="img-fluid" alt="About Us Image"
+                 style="max-width: 100px;">
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-6 mb-5 ">
-            <h2>We maintain the <span class="text-primary">privacy</span> , <span class="text-primary">security</span>  and <span class="text-primary">protection</span> of your personal information.</h2>
+            <h2>We maintain the <span class="text-primary">privacy</span> , <span class="text-primary">security</span>
+                and <span class="text-primary">protection</span> of your personal information.</h2>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6 my-5">
             <h2 class="mb-4">About Password Manager</h2>
-            <p>Password Manager makes it easy for you to save passwords for each of your online accounts. Here you can store all your passwords, usernames and emails so you will never forget them.</p>
-            <p></p>
+            <p>Password Manager makes it easy for you to save passwords for each of your online accounts. Here you can
+                store all your passwords, usernames and emails so you will never forget them.</p>
+            <a href="{% url 'login' %}" class="btn btn-primary">Get started!</a>
+            <a href="#create" class="btn btn-secondary">+ info</a>
         </div>
         <div class="col-md-6 my-5">
             <img src="{% static 'core/images/about_mujer_login.png' %}" class="img-fluid" alt="About Us Image">
+        </div>
+    </div>
+    <div id="create" class="row my-5">
+        <div class="col-md-6 my-5">
+            <video controls class="img-fluid">
+                <source src="{% static 'core/videos/demostracionPassMan.mov' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="col-md-6 my-5">
+            <h3>Features</h3>
+            <ul>
+                <li>Securely store and manage your passwords.</li>
+                <li>Generate strong and unique passwords for your accounts.</li>
+                <li>Access your passwords from anywhere with internet connection.</li>
+                <li>Easy-to-use interface for adding, editing, and deleting passwords.</li>
+            </ul>
+
+            <h3 class="mt-5">Why Choose Us?</h3>
+            <p>We strive to provide the best password management solution to keep your sensitive information safe and
+                easily accessible. Our program is designed with user privacy and security in mind, offering robust
+                features and intuitive functionality.</p>
+
+        </div>
+    </div>
+    <!-- Testimonials Section -->
+    <div id="testimonials" class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h2 class="text-center mb-4">Testimonials</h2>
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">"Password Manager has made my life so much easier! I no longer
+                                        have to
+                                        worry about forgetting my passwords."</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">John Doe</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">"I love how intuitive and user-friendly Password Manager is.
+                                        Highly
+                                        recommend it to anyone looking for a reliable password management tool."</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Jane Smith</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">"I've been using Password Manager for months now, and it has
+                                        never let
+                                        me down. It's reliable, secure, and easy to use. Definitely my go-to password
+                                        solution!"</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Sarah Johnson</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">"As someone who juggles multiple accounts daily, Password
+                                        Manager has
+                                        become an essential tool for me. It's like having a personal vault for all my
+                                        sensitive
+                                        information."</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Michael Thompson</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark visually-hidden" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark visually-hidden" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="card-deck">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h2 class="text-center mb-4">Contact Us</h2>
+                <p class="text-center">Have a question or feedback? We'd love to hear from you!</p>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" rows="5"
+                                  placeholder="Enter your message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block my-5">Send Message</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

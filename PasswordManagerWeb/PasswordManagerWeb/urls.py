@@ -20,12 +20,12 @@ from core.views import CreateSite, DeleteSite, SiteUpdate, HomeListView
 from django.conf import settings
 
 urlpatterns = [
-    path('', HomeListView.as_view(), name='home'),
+    path('home', HomeListView.as_view(), name='home'),
     path('add/', CreateSite.as_view(), name="add"),
     path('site/<str:pk>/', views.site, name="site"),
     path('update/<int:pk>/', SiteUpdate.as_view(), name="update"),
     path('delete/<int:pk>/', views.DeleteSite.as_view(), name="delete"),
-    path('about/', views.about, name="about"),
+    path('', views.about, name="about"),
     path('admin/', admin.site.urls),
 
     # Authentication paths

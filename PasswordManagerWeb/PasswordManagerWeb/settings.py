@@ -145,3 +145,6 @@ MEDIRA_ROOT = os.path.join(BASE_DIR, 'media')
 # duration session
 SESSION_COOKIE_AGE = 3600
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+

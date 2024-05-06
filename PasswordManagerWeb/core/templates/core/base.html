@@ -69,7 +69,10 @@ background: linear-gradient(90deg, rgba(0,57,126,1) 11%, rgba(0,0,0,1) 100%);
             <a class="nav-link" href="{% url 'about' %}">About us</a>
           </li>
           <li class="nav-item mx-2">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="nav-link">Logout</button>
+          </form>
           </li>
           <li class="nav-item mx-5">
             <p class="navbar-text">User: <i>{{ request.user.username }}</i></p>

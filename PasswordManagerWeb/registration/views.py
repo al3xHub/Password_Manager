@@ -82,5 +82,5 @@ class EmailUpdate(UpdateView):
 class DeleteUser(SuccessMessageMixin, generic.DeleteView):
     model = User
     template_name = 'registration/delete_user_confirm.html'
-    success_message = 'Account already deleted'
     success_url = reverse_lazy('login')
+    success_message = "User has been deleted. We hope to see you again soon."

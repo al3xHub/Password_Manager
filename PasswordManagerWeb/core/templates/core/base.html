@@ -35,18 +35,18 @@ background: linear-gradient(90deg, rgba(0,57,126,1) 11%, rgba(0,0,0,1) 100%);
 </head>
 <body style="font-family: Verdana, Arial, sans-serif;">
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-menu">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-menu fixed-top">
     <div class="container">
       <!-- Logo -->
       <a class="navbar-brand" href="{% url 'home' %}">
         <img src="{% static 'core/images/Password_Manager.png'%}" alt="Logo">
       </a>
       <!-- Collapse button for small devices -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Navbar elements -->
-      <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
           {% if not request.user.is_authenticated %}
           <li class="nav-item mx-2">
@@ -88,9 +88,6 @@ background: linear-gradient(90deg, rgba(0,57,126,1) 11%, rgba(0,0,0,1) 100%);
   <!-- End Content -->
 
 
-  <!-- Bootstrap JS (opcional, para funcionalidades como el botón colapsable) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

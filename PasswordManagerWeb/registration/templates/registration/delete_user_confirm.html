@@ -4,12 +4,14 @@
 {% block content %}
 <style>.errorlist{color:red;}</style>
 <main role="main">
-  <div class="container">
-    <div class="row mt-3">
-      <div class="col-md-9 mx-auto mb-5">
+  <div class="container mt-5">
+    <div class="row mt-5">
+      <div class="col-md-9 mx-auto my-5">
         <form action="" method="post">{% csrf_token %}
-            <h3 class="mb-4">Delete Account</h3>
-            <p><input type="submit" class="btn btn-danger btn-block" value="Delete Account"></p>
+            <h3 class="my-4">Delete Account</h3>
+          <p>Are you sure you wanto to delete "{{ object }}"?</p>
+            <input type="submit" class="btn btn-danger btn-block" value="Delete Account">
+        <a href="{% url 'home' %}" class="btn btn-secondary">No, thank you.</a>
         </form>
       </div>
     </div>

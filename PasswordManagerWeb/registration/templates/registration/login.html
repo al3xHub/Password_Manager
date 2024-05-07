@@ -5,11 +5,18 @@
 <style>.errorlist{color:red;}</style>
 <div class="container mt-5">
     <div class="row justify-content-center">
-      <div class="col-md-6">
+      <div class="col-md-6 mt-5">
         {% if 'register' in request.GET %}
-                <div class="alert alert-success" role="alert">User registered successfully!</div>
+                <div class="alert alert-success mt-5" role="alert">User registered successfully!</div>
         {% endif %}
-        <div class="card">
+        {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="alert alert-success mt-5" role="alert">{{ message }}</div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+        <div class="card mt-5">
           <div class="card-header">
             Login
           </div>

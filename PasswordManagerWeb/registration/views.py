@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django import forms
 from .models import Profile
+from django.contrib import messages
 
 
 # Create your views here.
@@ -77,6 +78,11 @@ class EmailUpdate(UpdateView):
             attrs={'class': 'form-control mb-2', 'placeholder': 'Email'}
         )
         return form
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'Email updated successfully.')
+        return response
 
 
 class DeleteUser(SuccessMessageMixin, generic.DeleteView):

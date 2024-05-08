@@ -174,12 +174,11 @@ class CreateSite(LoginRequiredMixin, CreateView):
 # Delete Site
 class DeleteSite(DeleteView):
     model = Site
-    success_url = reverse_lazy('home')
 
     def delete(self, request, *args, **kwargs):
         try:
-            response = super().delete(request, *args, **kwargs)
             messages.success(self.request, 'Site deleted successfully.')
+            response = super().delete(request, *args, **kwargs)
             return response
         except Exception as e:
             messages.error(self.request, f'Error deleting site: {str(e)}')
@@ -189,6 +188,8 @@ class DeleteSite(DeleteView):
                 context=self.get_context_data(),
                 status=400
             )
+
+    success_url = reverse_lazy('home')
 
 
 def about(request):

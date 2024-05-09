@@ -24,7 +24,7 @@ urlpatterns = [
     path('add/', CreateSite.as_view(), name="add"),
     path('site/<str:pk>/', views.site, name="site"),
     path('update/<int:pk>/', SiteUpdate.as_view(), name="update"),
-    path('delete/<int:pk>/', views.DeleteSite.as_view(), name="delete"),
+    path('delete/<int:pk>/', DeleteSite.as_view(), name="delete"),
     path('', views.about, name="about"),
     path('admin/', admin.site.urls),
 

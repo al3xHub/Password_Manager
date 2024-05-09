@@ -1,11 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django import forms
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.utils.safestring import mark_safe
+from django.http import HttpResponseRedirect
+from django.views import generic
 
 from .models import Site
 from django.views.generic import CreateView, DeleteView, UpdateView, ListView
@@ -43,6 +46,11 @@ class HomeListView(ListView):
 
         context = {'sites': queryset}
         return render(request, self.template_name, context)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['messages'] = messages.get_messages(self.request)
+        return context
 
 
 def profile(request):
@@ -172,24 +180,23 @@ class CreateSite(LoginRequiredMixin, CreateView):
 
 
 # Delete Site
-class DeleteSite(DeleteView):
+class DeleteSite(SuccessMessageMixin, generic.DeleteView):
     model = Site
+    template_name = 'core/site_confirm_delete.html'
+    success_url = reverse_lazy('home')
+    success_message = "Site has been deleted."
 
     def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
         try:
-            messages.success(self.request, 'Site deleted successfully.')
-            response = super().delete(request, *args, **kwargs)
-            return response
+            # Intentamos eliminar el objeto
+            self.object.delete()
+            messages.success(self.request, self.success_message)
         except Exception as e:
-            messages.error(self.request, f'Error deleting site: {str(e)}')
-            return self.response_class(
-                request=self.request,
-                template_name=self.template_name,
-                context=self.get_context_data(),
-                status=400
-            )
-
-    success_url = reverse_lazy('home')
+            # En caso de error, mostramos un mensaje de error
+            messages.error(self.request, f"Failed to delete site. Error: {e}")
+        return HttpResponseRedirect(success_url)
 
 
 def about(request):

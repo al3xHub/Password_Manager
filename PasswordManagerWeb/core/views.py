@@ -190,11 +190,9 @@ class DeleteSite(SuccessMessageMixin, generic.DeleteView):
         self.object = self.get_object()
         success_url = self.get_success_url()
         try:
-            # Intentamos eliminar el objeto
             self.object.delete()
             messages.success(self.request, self.success_message)
         except Exception as e:
-            # En caso de error, mostramos un mensaje de error
             messages.error(self.request, f"Failed to delete site. Error: {e}")
         return HttpResponseRedirect(success_url)
 
